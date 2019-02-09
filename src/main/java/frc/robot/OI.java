@@ -47,7 +47,7 @@ public class OI {
   
   }
   
-  public double getElevator(){
+  public double getElevatorSpeed(){
 
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_AXIS_ID);
 
