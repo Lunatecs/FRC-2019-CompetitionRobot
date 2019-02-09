@@ -22,13 +22,13 @@ public class OI {
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
-  public Joystick controller = new Joystick(RobotMap.CONTROLLER_USB_ID);
-  public Joystick operatorJoystick = new Joystick(1);
+  public Joystick driverJoystick = new Joystick(RobotMap.DRIVER_JOYSTICK_USB_ID);
+  public Joystick operatorJoystick = new Joystick(RobotMap.OPERATOR_JOYSTICK_USB_ID);
   
-  JoystickButton greenButton = new JoystickButton(controller, RobotMap.GREEN_BUTTON_ID);
-  JoystickButton redButton = new JoystickButton(controller, RobotMap.RED_BUTTON_ID);
-  JoystickButton blueButton = new JoystickButton(controller, RobotMap.BLUE_BUTTON_ID);
-  JoystickButton yellowButton = new JoystickButton(controller, RobotMap.YELLOW_BUTTON_ID);
+  JoystickButton greenButton = new JoystickButton(driverJoystick, RobotMap.GREEN_BUTTON_ID);
+  JoystickButton redButton = new JoystickButton(driverJoystick, RobotMap.RED_BUTTON_ID);
+  JoystickButton blueButton = new JoystickButton(driverJoystick, RobotMap.BLUE_BUTTON_ID);
+  JoystickButton yellowButton = new JoystickButton(driverJoystick, RobotMap.YELLOW_BUTTON_ID);
 
   public OI(){
     //Publick Occurences
@@ -37,19 +37,19 @@ public class OI {
 
   public double getSpeed(){
 
-    return controller.getRawAxis(RobotMap.LEFT_AXIS_ID);
+    return driverJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
   
   }
 
   public double getRotation(){
 
-    return controller.getRawAxis(RobotMap.RIGHT_AXIS_ID);
+    return driverJoystick.getRawAxis(RobotMap.RIGHT_JOY_X_ID);
   
   }
   
   public double getElevatorSpeed(){
 
-    return this.operatorJoystick.getRawAxis(RobotMap.LEFT_AXIS_ID);
+    return this.operatorJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
 
   }
   //// TRIGGERING COMMANDS WITH BUTTONS

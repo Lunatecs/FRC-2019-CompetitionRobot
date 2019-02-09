@@ -20,18 +20,18 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Intake extends Subsystem {
 
-  private TalonSRX intakePivot = new TalonSRX(RobotMap.INTAKE_TALON_CAN_ID);
+  private TalonSRX intakeWrist = new TalonSRX(RobotMap.INTAKE_WRIST_CONTROLLER_T_ID);
   private AnalogInput ai = new AnalogInput(3);
   private AnalogPotentiometer potentiometer = new AnalogPotentiometer(ai, 1080, 30);
   
   //constructor
   public Intake() {
     //No need for constant
-    intakePivot.setNeutralMode(NeutralMode.Brake);
+    intakeWrist.setNeutralMode(NeutralMode.Brake);
   }
 
   public void setSpeed(double speed) {
-    intakePivot.set(ControlMode.PercentOutput, speed); 
+    intakeWrist.set(ControlMode.PercentOutput, speed); 
   }
 
   public double getAngle() { 

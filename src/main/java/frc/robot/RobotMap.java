@@ -39,23 +39,32 @@ public class RobotMap {
   public static int DRIVER_JOYSTICK_USB_ID = 0;
   public static int OPERATOR_JOYSTICK_USB_ID = 1;
 
-  //buttons for the driver controller
-  public static int DRIVER_GREEN_BUTTON_ID  = 1;
-  public static int DRIVER_RED_BUTTON_ID    = 2;
-  public static int DRIVER_BLUE_BUTTON_ID   = 3;
-  public static int DRIVER_YELLOW_BUTTON_ID = 4;
+  public static int GREEN_BUTTON_ID  = 1;
+  public static int RED_BUTTON_ID    = 2;
+  public static int BLUE_BUTTON_ID   = 3;
+  public static int YELLOW_BUTTON_ID = 4;
 
   public static int LEFT_BUMPER_ID = 5;
-  //the axes of the controller
-  public static int LEFT_AXIS_ID = 1;
-  //This is used for speed ^^^^
-  public static int RIGHT_AXIS_ID = 4;
-  //This is used for rotation ^^^^
-  public static int LEFT_TRIGGER_ID = 2;
-  //Was used for intake up control ^^^^
-  public static int RIGHT_TRIGGER_ID = 3;
-  //Was used for intake down control ^^^^
-  //#triggered
+  public static int RIGHT_BUMBER_ID = 6;
+
+  //the axes of joysticks on the controllers
+  public static int LEFT_JOY_X_ID = 0;
+  public static int LEFT_JOY_Y_ID = 1;
+  public static int RIGHT_JOY_X_ID = 4;
+  public static int RIGHT_JOY_Y_ID = 5;
+
+  public static int LEFT_SELECT_ID = 7;
+  public static int RIGHT_SELECT_ID = 8;
+
+  public static int TOP_DPAD_ID = 8;
+  public static int TOP_RIGHT_DPAD_ID = 8;
+  public static int RIGHT_DPAD_ID = 8;
+  public static int BOTTOM_RIGHT_DPAD_ID = 8;
+  public static int BOTTOM_DPAD_ID = 8;
+  public static int BOTTOM_LEFT_DPAD_ID = 8;
+  public static int LEFT_DPAD_ID = 8;
+  public static int TOP_LEFT_DPAD_ID = 8;
+
 
   public static int ULTRASONIC_PING_ID = 9;
   public static int ULTRASONIC_ECHO_ID = 8;
