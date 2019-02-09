@@ -17,19 +17,34 @@ public class RobotMap {
  
   //MOST OF THESE ARE IDs, KEEP THIS IN MIND DURING PROGRAMMING
 
-  public static int LEFT_TALON_CAN_ID = 3;
-  public static int LEFT_VICTOR_CAN_ID = 2;
+  public static int LEFT_CENTER_DRIVE_T_ID  = 16;
+  public static int LEFT_BACK_DRIVE_V_ID    = 15;
+  public static int LEFT_FRONT_DRIVE_V_ID   = 14;
 
-  public static int RIGHT_TALON_CAN_ID = 4;
-  public static int RIGHT_VICTOR_CAN_ID = 1;
+  public static int RIGHT_CENTER_DRIVE_T_ID = 1;
+  public static int RIGHT_BACK_DRIVE_V_ID   = 2;
+  public static int RIGHT_FRONT_DRIVE_V_ID  = 3;
 
-  public static int CONTROLLER_USB_ID = 0;
-  //buttons for the controllers are below
-  public static int GREEN_BUTTON_ID = 1;
-  public static int RED_BUTTON_ID = 2;
-  public static int BLUE_BUTTON_ID = 3;
-  public static int YELLOW_BUTTON_ID = 4;
-  //more buttons
+
+  public static int INTAKE_TOP_CONTROLLER_T_ID    = 5;
+  public static int INTAKE_BOTTOM_CONTROLLER_T_ID = 12;
+  public static int INTAKE_WRIST_CONTROLLER_T_ID  = 10;
+
+  public static int ELEVATOR_LEAD_CONTROLLER_T_ID   = 7;
+  public static int ELEVATOR_FOLLOW_CONTROLLER_V_ID = 6;
+
+  public static int CLIMBER_RIGHT_CONTROLLER_V_ID = 4;
+  public static int CLIMBER_LEFT_CONTROLLER_V_ID  = 13;
+
+  public static int DRIVER_JOYSTICK_USB_ID = 0;
+  public static int OPERATOR_JOYSTICK_USB_ID = 1;
+
+  //buttons for the driver controller
+  public static int DRIVER_GREEN_BUTTON_ID  = 1;
+  public static int DRIVER_RED_BUTTON_ID    = 2;
+  public static int DRIVER_BLUE_BUTTON_ID   = 3;
+  public static int DRIVER_YELLOW_BUTTON_ID = 4;
+
   public static int LEFT_BUMPER_ID = 5;
   //the axes of the controller
   public static int LEFT_AXIS_ID = 1;
@@ -51,8 +66,6 @@ public class RobotMap {
   //these are the limits for the potentiometer
   public static double POTENTIOMETER_UPPERLIMIT = 565.0;
   public static double POTENTIOMETER_LOWERLIMIT = 385.0;
-
-  public static int INTAKE_TALON_CAN_ID = 5;
 
   public static int LED_PWM_ID = 3;
 
