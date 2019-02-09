@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.drive.LunatecsDrive;
-import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.drive.DriveWithJoysticks;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
