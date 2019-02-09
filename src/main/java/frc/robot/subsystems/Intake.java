@@ -42,7 +42,6 @@ public class Intake extends Subsystem {
   }
 
   public void setWristPosition(int ticks){
-    //WILL, AGAIN, I DON'T WANT TICKS IN THE WORKSHOP
 
   }
 
