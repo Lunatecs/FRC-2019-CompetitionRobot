@@ -56,15 +56,8 @@ public class RobotMap {
   public static int LEFT_SELECT_ID = 7;
   public static int RIGHT_SELECT_ID = 8;
 
-  public static int TOP_DPAD_ID = 8;
-  public static int TOP_RIGHT_DPAD_ID = 8;
-  public static int RIGHT_DPAD_ID = 8;
-  public static int BOTTOM_RIGHT_DPAD_ID = 8;
-  public static int BOTTOM_DPAD_ID = 8;
-  public static int BOTTOM_LEFT_DPAD_ID = 8;
-  public static int LEFT_DPAD_ID = 8;
-  public static int TOP_LEFT_DPAD_ID = 8;
-
+  public static int LEFT_JOY_BUTTON_ID = 9;
+  public static int RIGHT_JOY_BUTTON_ID = 10;
 
   public static int ULTRASONIC_PING_ID = 9;
   public static int ULTRASONIC_ECHO_ID = 8;
