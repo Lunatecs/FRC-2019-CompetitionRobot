@@ -38,9 +38,9 @@ public class Limelight extends Subsystem {
   public boolean isValidTarget(){
      double check = table.getEntry("tv").getDouble(0.0);
 
-     if (check == 1) {
+     if (check == 1.0) {
        return true;
-     } else if (check == 0) {
+     } else if (check == 0.0) {
        return false;
      } else {
        return false;
@@ -57,17 +57,18 @@ public class Limelight extends Subsystem {
   }
 
   //Only use if a camera is plugged into limelight
-  //0 = Side-by-Side
-  //1 = Secondary Cam Lower-Right corner
-  //2 = Primary Cam Lower-Right corner
+  //0.0 = Side-by-Side
+  //1.0 = Secondary Cam Lower-Right corner
+  //2.0 = Primary Cam Lower-Right corner
   public void setStreamMode(double value){
     table.getEntry("stream").setDouble(value);
   }
 
-  //0-9 diffrent pipelines that can be set
+  //0.0-9.0 diffrent pipelines that can be set
   public void setPipeline(double value){
     table.getEntry("pipeline").setDouble(value);
   }
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
