@@ -26,7 +26,15 @@ public class Elevator extends Subsystem {
   public TalonSRX leader = new TalonSRX(RobotMap.ELEVATOR_LEAD_CONTROLLER_T_ID);
   private static NeutralMode ELEVATOR_NEUTRAL_MODE = NeutralMode.Brake;
 
+  // this is for going up
+  private static double PEAK_FORWARD = 1.0;
+
+  // this is for going down
+  private static double PEAK_BACKWARD = 1.0;
+ 
+  private static int TIMEOUT = 10;
   private static double DEADZONE = .1;
+  public static double kP = 0.13;
 
   public Elevator(){
     leader.configFactoryDefault();
@@ -35,6 +43,14 @@ public class Elevator extends Subsystem {
     leader.setNeutralMode(ELEVATOR_NEUTRAL_MODE);
     follower.setNeutralMode(ELEVATOR_NEUTRAL_MODE);
 
+    leader.configPeakOutputForward(PEAK_FORWARD,TIMEOUT);
+    follower.configPeakOutputForward(PEAK_FORWARD,TIMEOUT);
+
+    leader.configPeakOutputReverse(PEAK_BACKWARD,TIMEOUT);
+    follower.configPeakOutputReverse(PEAK_BACKWARD,TIMEOUT);
+
+    leader.setSelectedSensorPosition(0,0,TIMEOUT);
+    leader.config_kP(0, kP, TIMEOUT);
     follower.follow(leader);
 
   }
@@ -57,7 +73,7 @@ public class Elevator extends Subsystem {
   }
 
   public void stop() {
-    
+    leader.set(ControlMode.PercentOutput,0);
   }
 
 
