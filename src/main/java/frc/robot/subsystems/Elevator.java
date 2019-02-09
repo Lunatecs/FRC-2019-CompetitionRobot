@@ -16,6 +16,23 @@ public class Elevator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public void setSpeed(double speed) {
+
+  }
+
+  public void setHeight(int ticks) {
+
+  }
+
+  public int getHeight() {
+    return -1;
+  }
+
+  public void stop() {
+    
+  }
+
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
