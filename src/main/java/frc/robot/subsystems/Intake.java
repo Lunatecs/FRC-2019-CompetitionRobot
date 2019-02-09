@@ -18,24 +18,17 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
+//The notes I add help me out, they may be redundant, but they help
+
 public class Intake extends Subsystem {
 
-  private TalonSRX intakeWrist = new TalonSRX(RobotMap.INTAKE_WRIST_CONTROLLER_T_ID);
-  private AnalogInput ai = new AnalogInput(3);
-  private AnalogPotentiometer potentiometer = new AnalogPotentiometer(ai, 1080, 30);
-  
   //constructor
+
+  //Setting intake motor for wrist
   public Intake() {
     //No need for constant
-    intakeWrist.setNeutralMode(NeutralMode.Brake);
-  }
+    
 
-  public void setSpeed(double speed) {
-    intakeWrist.set(ControlMode.PercentOutput, speed); 
-  }
-
-  public double getAngle() { 
-    return potentiometer.get();
   }
 
   @Override
@@ -43,4 +36,46 @@ public class Intake extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+
+  public void setWristSpeed(double speed){
+    
+  }
+
+  public void setWristPosition(int ticks){
+    //WILL, AGAIN, I DON'T WANT TICKS IN THE WORKSHOP
+
+  }
+
+  public void lowerBeak(){
+    
+  }
+
+  public void raiseBeak(){
+
+  }
+
+  public void pushPistons(){
+
+  }
+
+  public void pullPistons(){
+
+  }
+
+  public void setUpperWheelSpeed(double speed){
+    
+  } 
+
+  public void setLowerWheelSpeed(double speed){
+    
+  }
+
+  public void lowerFoot(){
+    
+  }
+
+  public void raiseFoot(){
+    
+  }
+
 }
