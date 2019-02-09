@@ -23,6 +23,7 @@ public class OI {
   // You create one by telling it which joystick it's on and which button
   // number it is.
   public Joystick controller = new Joystick(RobotMap.CONTROLLER_USB_ID);
+  public Joystick operatorJoystick = new Joystick(1);
   
   JoystickButton greenButton = new JoystickButton(controller, RobotMap.GREEN_BUTTON_ID);
   JoystickButton redButton = new JoystickButton(controller, RobotMap.RED_BUTTON_ID);
@@ -46,6 +47,11 @@ public class OI {
   
   }
   
+  public double getElevator(){
+
+    return this.operatorJoystick.getRawAxis(RobotMap.LEFT_AXIS_ID);
+
+  }
   //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of
   // three ways:
