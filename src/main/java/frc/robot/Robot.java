@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +26,7 @@ import frc.robot.subsystems.Elevator;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
+  public static Intake intake;
   public static DriveTrain drive;
   public static Elevator elevator;
 
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+    intake = new Intake();
     drive = new DriveTrain();
     elevator = new Elevator();
     SmartDashboard.putData(drive);

@@ -66,6 +66,7 @@ public class Intake extends Subsystem {
   public void setWristPosition(int ticks){
     //WILL, AGAIN, I DON'T WANT TICKS IN THE WORKSHOP
     intakeWrist.set(ControlMode.Position, ticks);
+
   }
 
   public void lowerBeak(){
