@@ -40,6 +40,9 @@ public class Intake extends Subsystem {
 
   public NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
   public NeutralMode WRIST_BRAKE_MODE = NeutralMode.Brake;
+  
+  public double DEADZONE = 0.1;
+  
   //Setting intake motor for wrist
   public Intake() {
     //No need for constant
@@ -60,12 +63,14 @@ public class Intake extends Subsystem {
   }
 
   public void setWristSpeed(double speed){
-    intakeWrist.set(ControlMode.PercentOutput, speed);
+    if(Math.abs(speed)> DEADZONE){
+      intakeWrist.set(ControlMode.PercentOutput, speed);
+    }
   }
 
   public void setWristPosition(int ticks){
     //WILL, AGAIN, I DON'T WANT TICKS IN THE WORKSHOP
-    intakeWrist.set(ControlMode.Position, ticks);
+      intakeWrist.set(ControlMode.Position, ticks);
 
   }
 
@@ -86,11 +91,15 @@ public class Intake extends Subsystem {
   }
 
   public void setUpperWheelSpeed(double speed){
-    upperWheel.set(ControlMode.PercentOutput, speed);
+    if(Math.abs(speed)> DEADZONE){
+      upperWheel.set(ControlMode.PercentOutput, speed);
+    }
   } 
 
   public void setLowerWheelSpeed(double speed){
-    lowerWheel.set(ControlMode.PercentOutput, speed);
+    if(Math.abs(speed)> DEADZONE){
+      lowerWheel.set(ControlMode.PercentOutput, speed);
+    }
   }
 
   public void lowerFoot(){
