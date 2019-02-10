@@ -12,29 +12,27 @@ import frc.robot.Robot;
 
 public class WristWithJoystick extends Command {
   public WristWithJoystick() {
-    requires(Robot.intake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
-    Robot.intake.setWristPosition(0);
-    //TODO REPLACE 0 WITH ACTUAL NUMBER
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    Robot.intake.setWristSpeed(Robot.oi.getWristSpeed());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
