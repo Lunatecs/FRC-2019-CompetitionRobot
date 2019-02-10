@@ -47,6 +47,9 @@ public class RobotMap {
   public static int LEFT_BUMPER_ID = 5;
   public static int RIGHT_BUMPER_ID = 6;
 
+  public static int LEFT_TRIGGER_ID = 2;
+  public static int RIGHT_TRIGGER_ID = 3;
+
   //the axes of joysticks on the controllers
   public static int LEFT_JOY_X_ID = 0;
   public static int LEFT_JOY_Y_ID = 1;

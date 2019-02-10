@@ -60,11 +60,11 @@ public class OI {
   }
 
   public boolean getIntakeCargoSpeed(){
-    return this.operatorJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID);
+    return this.operatorJoystick.getRawButton(RobotMap.RIGHT_TRIGGER_ID);
   }
 
   public boolean getLaunchCargoSpeed(){
-    return this.operatorJoystick.getRawButton(RobotMap.LEFT_BUMPER_ID);
+    return this.operatorJoystick.getRawButton(RobotMap.LEFT_TRIGGER_ID);
   }
   //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of
