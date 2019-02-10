@@ -14,7 +14,7 @@ public class WristWithJoystick extends Command {
   public WristWithJoystick() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.intake);
+    requires(Robot.wrist);
   }
 
   // Called just before this Command runs the first time
@@ -26,7 +26,7 @@ public class WristWithJoystick extends Command {
   @Override
   protected void execute() {
 
-    Robot.intake.setWristSpeed(Robot.oi.getWristSpeed());
+    Robot.wrist.setWristSpeed(Robot.oi.getWristSpeed());
   }
 
   // Make this return true when this Command no longer needs to run execute()
