@@ -52,6 +52,12 @@ public class OI {
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
 
   }
+
+  public double getWristSpeed(){
+
+    return this.operatorJoystick.getRawAxis(RobotMap.RIGHT_JOY_Y_ID);
+
+  }
   //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of
   // three ways:
