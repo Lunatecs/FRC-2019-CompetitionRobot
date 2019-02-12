@@ -26,8 +26,8 @@ public class RobotMap {
   public static int RIGHT_FRONT_DRIVE_V_ID  = 3;
 
 
-  public static int INTAKE_TOP_CONTROLLER_T_ID    = 5;
-  public static int INTAKE_BOTTOM_CONTROLLER_T_ID = 12;
+  public static int INTAKE_TOP_CONTROLLER_T_ID    = 12;
+  public static int INTAKE_BOTTOM_CONTROLLER_T_ID = 5;
   public static int INTAKE_WRIST_CONTROLLER_T_ID  = 10;
 
   public static int ELEVATOR_LEAD_CONTROLLER_T_ID   = 7;
