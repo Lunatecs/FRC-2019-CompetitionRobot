@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 public class LEDVisionTracking extends Command {
   
   private Ultrasonic rangeFinder = new Ultrasonic(RobotMap.ULTRASONIC_PING_ID, RobotMap.ULTRASONIC_ECHO_ID);
+  private static final double LEDTriggerLimit = 50;
   
   public LEDVisionTracking() {
     // Use requires() here to declare subsystem dependencies
@@ -36,7 +37,7 @@ public class LEDVisionTracking extends Command {
     double actualDistance = rangeFinder.getRangeInches();
     
     //If in range of ultrasonic sensor and there is a valid target
-    if(!(actualDistance < 0) && Robot.limelight.isValidTarget()){
+    if(actualDistance <= LEDTriggerLimit && Robot.limelight.isValidTarget() && !(actualDistance < 0)){
       Robot.led.setColor(LED.SOLID_GREEN);
     } else {
       Robot.led.setColor(LED.SOLID_RED);
