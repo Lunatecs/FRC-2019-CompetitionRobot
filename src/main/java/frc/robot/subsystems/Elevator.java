@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.elevator.ElevatorWithJoystick;
 
@@ -30,11 +31,15 @@ public class Elevator extends Subsystem {
   private static double PEAK_FORWARD = 1.0;
 
   // this is for going down
-  private static double PEAK_BACKWARD = 1.0;
+  private static double PEAK_BACKWARD = -1.0;
  
   private static int TIMEOUT = 10;
   private static double DEADZONE = .1;
-  public static double kP = 0.13;
+  private static final double POSITION_kP = 0.13;
+  private static final double PERCENT_kP = 0.00007843;
+
+  private static final double TOP_ELEVATOR_LIMIT = 25500.0;
+  private static final double BOTTOM_ELEVATOR_LIMIT = 0.0;
 
   public Elevator(){
     leader.configFactoryDefault();
@@ -50,15 +55,63 @@ public class Elevator extends Subsystem {
     follower.configPeakOutputReverse(PEAK_BACKWARD,TIMEOUT);
 
     leader.setSelectedSensorPosition(0,0,TIMEOUT);
-    leader.config_kP(0, kP, TIMEOUT);
+    leader.setSensorPhase(true);
+    leader.config_kP(0, PERCENT_kP, TIMEOUT);
     follower.follow(leader);
 
   }
 
   public void setSpeed(double speed) {
     if(Math.abs(speed)> DEADZONE){
-      leader.set(ControlMode.PercentOutput, speed);
+      
+      if(speed < 0){
+
+        double error = TOP_ELEVATOR_LIMIT - leader.getSelectedSensorPosition(0);
+
+        double speed2 = PERCENT_kP * speed* error;
+
+        if(speed2 < speed){
+          speed2 = speed;
+        }
+
+        SmartDashboard.putNumber("UP", speed2);
+
+        leader.set(ControlMode.PercentOutput, speed2);
+
+      } else if(speed > 0){
+
+        double error = leader.getSelectedSensorPosition(0) - BOTTOM_ELEVATOR_LIMIT;
+
+        double speed2 = PERCENT_kP * speed * error;
+
+        if(speed2 > speed){
+          speed2 = speed;
+        }
+
+        SmartDashboard.putNumber("DOWN", speed2);
+
+        leader.set(ControlMode.PercentOutput, speed2);
+
+      }
+
+    } else {
+      stop();
     }
+
+    
+
+ }
+
+  public void checkAndResetEncoder() {
+    boolean fwd = false;
+    boolean rev = false;
+    if(leader.getSensorCollection().isFwdLimitSwitchClosed()) {
+      fwd = true;
+    } else if(leader.getSensorCollection().isRevLimitSwitchClosed()) {
+      rev = true;
+    }
+    SmartDashboard.putBoolean("Fwd", fwd);
+    SmartDashboard.putBoolean("Rev", rev);
   }
 
   public void setHeight(int ticks) {

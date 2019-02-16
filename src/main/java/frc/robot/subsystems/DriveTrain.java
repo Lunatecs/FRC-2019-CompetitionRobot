@@ -32,6 +32,15 @@ public class DriveTrain extends Subsystem {
   private static NeutralMode DRIVE_NEUTRAL_MODE = NeutralMode.Brake;
 
   public DriveTrain(){
+
+    leftFront_V.configFactoryDefault();
+    leftCenter_T.configFactoryDefault();
+    leftBack_V.configFactoryDefault();
+
+    rightFront_V.configFactoryDefault();
+    rightCenter_T.configFactoryDefault();
+    rightBack_V.configFactoryDefault();
+
     
     leftFront_V.setNeutralMode(DRIVE_NEUTRAL_MODE);
     leftCenter_T.setNeutralMode(DRIVE_NEUTRAL_MODE);
@@ -55,6 +64,14 @@ public class DriveTrain extends Subsystem {
   
   public void arcadeDrive(double speed, double rotation){
     drive.arcadeDrive(speed, rotation, false);
+  }
+
+  public double getLeftEncoder() {
+    return leftCenter_T.getSelectedSensorPosition(0);
+  }
+
+  public double getRightEncoder() {
+    return rightCenter_T.getSelectedSensorPosition(0);
   }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

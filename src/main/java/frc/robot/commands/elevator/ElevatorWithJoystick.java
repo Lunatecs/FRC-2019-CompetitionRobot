@@ -8,6 +8,7 @@
 package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class ElevatorWithJoystick extends Command {
@@ -27,6 +28,9 @@ public class ElevatorWithJoystick extends Command {
   protected void execute() {
 
     Robot.elevator.setSpeed(Robot.oi.getElevatorSpeed());
+    SmartDashboard.putData(Robot.elevator);
+    SmartDashboard.putNumber("Encoder", Robot.elevator.getHeight());
+    Robot.elevator.checkAndResetEncoder();
 
   }
 

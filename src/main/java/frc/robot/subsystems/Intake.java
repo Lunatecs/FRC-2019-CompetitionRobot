@@ -32,9 +32,9 @@ public class Intake extends Subsystem {
   public TalonSRX upperWheel= new TalonSRX(RobotMap.INTAKE_TOP_CONTROLLER_T_ID),
                   lowerWheel = new TalonSRX(RobotMap.INTAKE_BOTTOM_CONTROLLER_T_ID);
 
-  public DoubleSolenoid footSolenoid = new DoubleSolenoid(0, 0),
-                        fangsSolenoid = new DoubleSolenoid(0, 0),
-                        beakSolenoid = new DoubleSolenoid(0, 0);
+  public DoubleSolenoid footSolenoid = new DoubleSolenoid(0, 7),
+                        fangsSolenoid = new DoubleSolenoid(2, 5),
+                        beakSolenoid = new DoubleSolenoid(1, 6);
 
   public NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
   

@@ -8,6 +8,7 @@
 package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 
@@ -27,6 +28,8 @@ public class DriveWithJoysticks extends Command {
   @Override
   protected void execute() {
     Robot.drive.arcadeDrive(-(Robot.oi.getSpeed()), Robot.oi.getRotation());
+    SmartDashboard.putNumber("LeftEncoder", Robot.drive.getLeftEncoder());
+    SmartDashboard.putNumber("RightEncoder", Robot.drive.getRightEncoder());
   }
 
   // Make this return true when this Command no longer needs to run execute()
