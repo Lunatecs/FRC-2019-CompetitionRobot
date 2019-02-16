@@ -28,7 +28,7 @@ public class Wrist extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-   // setDefaultCommand(new WristWithJoystick());
+   setDefaultCommand(new WristWithJoystick());
   }
 
   public Wrist(){
