@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.wrist.WristWithJoystick;
 import frc.robot.Robot;
@@ -25,6 +28,8 @@ public class Wrist extends Subsystem {
   public TalonSRX intakeWrist = new TalonSRX(RobotMap.INTAKE_WRIST_CONTROLLER_T_ID);
   public NeutralMode WRIST_BRAKE_MODE = NeutralMode.Brake;
   public double DEADZONE = 0.1;
+  AnalogInput in = new AnalogInput(0);
+  AnalogPotentiometer pot = new AnalogPotentiometer(in);
 
   @Override
   public void initDefaultCommand() {
@@ -36,9 +41,12 @@ public class Wrist extends Subsystem {
     intakeWrist.configFactoryDefault();
 
     intakeWrist.setNeutralMode(WRIST_BRAKE_MODE);
-
+    intakeWrist.config_kP(0, 1.4, 10);
+    intakeWrist.setSensorPhase(true);
+    intakeWrist.configPeakOutputForward(.1, 10);
+    intakeWrist.configPeakOutputReverse(-.3, 10);
     //intakeWrist.configContinuousCurrentLimit(amps,10);
-    intakeWrist.configVoltageCompSaturation(12.0);
+    intakeWrist.configVoltageCompSaturation(2.7);
   }
 
   int currentPos = 0;
@@ -48,12 +56,14 @@ public class Wrist extends Subsystem {
       intakeWrist.set(ControlMode.PercentOutput, speed);
       currentPos = intakeWrist.getSelectedSensorPosition(0);
     } else {
-     // if(Robot.oi.operatorJoystick.getRawButton(RobotMap.RED_BUTTON_ID)) {
-     //   intakeWrist.set(ControlMode.Position, currentPos);
-     // } else {
-        intakeWrist.set(ControlMode.PercentOutput, 0);
-     // }
+      if(pot.get()>.195) {
+        intakeWrist.set(ControlMode.Position, currentPos);
+      } else {
+        intakeWrist.set(ControlMode.PercentOutput, 0.0);
+      }
     }
+    SmartDashboard.putString("Wrist Position (Current/Set)", intakeWrist.getSelectedSensorPosition(0) + "/" + currentPos);
+    SmartDashboard.putNumber("Potentiometer", pot.get());
   }
 
   public void setWristPosition(int ticks){

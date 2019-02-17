@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.intake.RaiseBeak;
+import frc.robot.commands.intake.LowerBeak;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,13 +27,17 @@ public class OI {
   public Joystick driverJoystick = new Joystick(RobotMap.DRIVER_JOYSTICK_USB_ID);
   public Joystick operatorJoystick = new Joystick(RobotMap.OPERATOR_JOYSTICK_USB_ID);
   
-  JoystickButton greenButton = new JoystickButton(driverJoystick, RobotMap.GREEN_BUTTON_ID);
-  JoystickButton redButton = new JoystickButton(driverJoystick, RobotMap.RED_BUTTON_ID);
-  JoystickButton blueButton = new JoystickButton(driverJoystick, RobotMap.BLUE_BUTTON_ID);
-  JoystickButton yellowButton = new JoystickButton(driverJoystick, RobotMap.YELLOW_BUTTON_ID);
+  JoystickButton greenButton = new JoystickButton(operatorJoystick, RobotMap.GREEN_BUTTON_ID);
+  JoystickButton redButton = new JoystickButton(operatorJoystick, RobotMap.RED_BUTTON_ID);
+  JoystickButton blueButton = new JoystickButton(operatorJoystick, RobotMap.BLUE_BUTTON_ID);
+  JoystickButton yellowButton = new JoystickButton(operatorJoystick, RobotMap.YELLOW_BUTTON_ID);
+  JoystickButton rightBumperButton = new JoystickButton(operatorJoystick, RobotMap.RIGHT_BUMPER_ID);
+  JoystickButton leftBumperButton = new JoystickButton(operatorJoystick, RobotMap.LEFT_BUMPER_ID);
+
 
   public OI(){
-    //Publick Occurences
+    rightBumperButton.toggleWhenPressed(new RaiseBeak());
+    leftBumperButton.toggleWhenPressed(new LowerBeak());
 
   }
 
