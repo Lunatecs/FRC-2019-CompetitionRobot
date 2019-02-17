@@ -5,18 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-
-public class DriveWithJoysticks extends Command {
-  public DriveWithJoysticks() {
-    requires(Robot.drive);
+public class CargoIntake extends Command {
+  public CargoIntake() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
@@ -27,9 +25,24 @@ public class DriveWithJoysticks extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
-    SmartDashboard.putNumber("LeftEncoder", Robot.drive.getLeftEncoder());
-    SmartDashboard.putNumber("RightEncoder", Robot.drive.getRightEncoder());
+
+    double intake = Robot.oi.getIntakeCargoSpeed();
+    double launch = Robot.oi.getLaunchCargoSpeed();
+
+    if(intake>.2) {
+      Robot.intake.setUpperWheelSpeed(intake);
+      Robot.intake.setLowerWheelSpeed(intake);
+    } else if(launch>.2) {
+      Robot.intake.setUpperWheelSpeed(-launch);
+      Robot.intake.setLowerWheelSpeed(-launch);
+    } else {
+      Robot.intake.setUpperWheelSpeed(0);
+      Robot.intake.setLowerWheelSpeed(0);
+    }
+
+    SmartDashboard.putNumber("Intake", intake);
+    SmartDashboard.putNumber("Launch", launch);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

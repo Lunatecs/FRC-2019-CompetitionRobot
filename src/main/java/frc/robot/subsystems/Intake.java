@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 
+import frc.robot.commands.intake.CargoIntake;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -54,7 +56,7 @@ public class Intake extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new CargoIntake());
   }
 
 
@@ -78,12 +80,16 @@ public class Intake extends Subsystem {
   public void setUpperWheelSpeed(double speed){
     if(Math.abs(speed)> DEADZONE){
       upperWheel.set(ControlMode.PercentOutput, speed);
+    } else {
+      upperWheel.set(ControlMode.PercentOutput, 0);
     }
   } 
 
   public void setLowerWheelSpeed(double speed){
     if(Math.abs(speed)> DEADZONE){
       lowerWheel.set(ControlMode.PercentOutput, speed);
+    } else {
+      lowerWheel.set(ControlMode.PercentOutput, 0);
     }
   }
 

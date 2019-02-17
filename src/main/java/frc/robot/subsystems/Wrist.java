@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.wrist.WristWithJoystick;
+import frc.robot.Robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -36,13 +37,22 @@ public class Wrist extends Subsystem {
 
     intakeWrist.setNeutralMode(WRIST_BRAKE_MODE);
 
+    //intakeWrist.configContinuousCurrentLimit(amps,10);
+    intakeWrist.configVoltageCompSaturation(12.0);
   }
+
+  int currentPos = 0;
 
   public void setWristSpeed(double speed){
     if(Math.abs(speed)> DEADZONE){
       intakeWrist.set(ControlMode.PercentOutput, speed);
+      currentPos = intakeWrist.getSelectedSensorPosition(0);
     } else {
-      intakeWrist.set(ControlMode.PercentOutput, 0);
+     // if(Robot.oi.operatorJoystick.getRawButton(RobotMap.RED_BUTTON_ID)) {
+     //   intakeWrist.set(ControlMode.Position, currentPos);
+     // } else {
+        intakeWrist.set(ControlMode.PercentOutput, 0);
+     // }
     }
   }
 
