@@ -41,6 +41,8 @@ public class Wrist extends Subsystem {
   public void setWristSpeed(double speed){
     if(Math.abs(speed)> DEADZONE){
       intakeWrist.set(ControlMode.PercentOutput, speed);
+    } else {
+      intakeWrist.set(ControlMode.PercentOutput, 0);
     }
   }
 
