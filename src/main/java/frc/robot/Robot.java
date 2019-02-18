@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
   public static LED led;
   public static Limelight limelight;
 
-  private DifferentialDrive aDrive;
+  private DifferentialDrive aDrive; 
 
   private WPI_VictorSPX leftFront_V = new WPI_VictorSPX(RobotMap.LEFT_FRONT_DRIVE_V_ID);
   private WPI_TalonSRX leftCenter_T = new WPI_TalonSRX(RobotMap.LEFT_CENTER_DRIVE_T_ID);
@@ -229,7 +229,7 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     followerNotifier.stop();
-    aDrive.tankdrive(0,0);
+    aDrive.tankDrive(0,0);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
