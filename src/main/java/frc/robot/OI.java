@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.intake.RaiseBeak;
+import frc.robot.commands.intake.RaiseAndGrabHatch;
 import frc.robot.commands.intake.LaunchHatch;
 import frc.robot.commands.intake.LowerBeak;
 import frc.robot.commands.intake.LowerFoot;
@@ -43,8 +44,7 @@ public class OI {
     rightBumperButton.toggleWhenPressed(new RaiseBeak());
     leftBumperButton.toggleWhenPressed(new LowerBeak());
     redButton.toggleWhenPressed(new LaunchHatch());
-    yellowButton.toggleWhenPressed(new RaiseFoot());
-    greenButton.toggleWhenPressed(new LowerFoot());
+    blueButton.toggleWhenPressed(new RaiseAndGrabHatch());
 
   }
 
