@@ -12,6 +12,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.intake.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -35,12 +36,14 @@ public class Intake extends Subsystem {
                   lowerWheel = new TalonSRX(RobotMap.INTAKE_BOTTOM_CONTROLLER_T_ID);
 
   public DoubleSolenoid footSolenoid = new DoubleSolenoid(0, 7),
-                        fangsSolenoid = new DoubleSolenoid(2, 5),
-                        beakSolenoid = new DoubleSolenoid(1, 6);
+                        fangsSolenoid = new DoubleSolenoid(5, 2),
+                        beakSolenoid = new DoubleSolenoid(6, 1);
 
   public NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
   
   public double DEADZONE = 0.1;
+
+  private boolean pistonsToggle = false;
   
   //Setting intake motor for wrist
   public Intake() {
@@ -75,6 +78,16 @@ public class Intake extends Subsystem {
 
   public void pullPistons(){
     fangsSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void togglePistons() {
+    if(pistonsToggle) {
+      pushPistons();
+    } else {
+      pullPistons();
+    }
+    pistonsToggle= !pistonsToggle;
+    SmartDashboard.putBoolean("Pistons", pistonsToggle);
   }
 
   public void setUpperWheelSpeed(double speed){

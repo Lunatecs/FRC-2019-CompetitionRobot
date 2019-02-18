@@ -46,13 +46,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
     intake = new Intake();
     drive = new DriveTrain();
     elevator = new Elevator();
     limelight = new Limelight();
     led = new LED();
     wrist = new Wrist();
+    oi = new OI();
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
