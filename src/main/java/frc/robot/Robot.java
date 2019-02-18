@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,15 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Wrist;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.followers.EncoderFollower;
+import edu.wpi.first.wpilibj.Notifier;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,6 +46,29 @@ public class Robot extends TimedRobot {
   public static Wrist wrist;
   public static LED led;
   public static Limelight limelight;
+
+  private DifferentialDrive aDrive;
+
+  private WPI_VictorSPX leftFront_V = new WPI_VictorSPX(RobotMap.LEFT_FRONT_DRIVE_V_ID);
+  private WPI_TalonSRX leftCenter_T = new WPI_TalonSRX(RobotMap.LEFT_CENTER_DRIVE_T_ID);
+  private WPI_VictorSPX leftBack_V  = new WPI_VictorSPX(RobotMap.LEFT_BACK_DRIVE_V_ID);
+
+  private WPI_VictorSPX rightFront_V = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_DRIVE_V_ID);
+  private WPI_TalonSRX rightCenter_T = new WPI_TalonSRX(RobotMap.RIGHT_CENTER_DRIVE_T_ID);
+  private WPI_VictorSPX rightBack_V = new WPI_VictorSPX(RobotMap.RIGHT_BACK_DRIVE_V_ID);
+
+  private EncoderFollower leftEncoderFollower;
+  private EncoderFollower rightEncoderFollower;
+
+  private Notifier followerNotifier;
+
+  private static NeutralMode DRIVE_NEUTRAL_MODE = NeutralMode.Brake;
+
+  private static final String PATH_NAME = "Test1";
+  private static final int TICKS_PER_ROTATION = 4096;
+  //TODO change wheel diameter to the average of the wheel diameter
+  private static final double WHEEL_DIAMETER = 6.375;
+  private static final double MAX_VELOCITY = 10;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -99,6 +132,55 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
 
+    leftFront_V.configFactoryDefault();
+    leftCenter_T.configFactoryDefault();
+    leftBack_V.configFactoryDefault();
+
+    rightFront_V.configFactoryDefault();
+    rightCenter_T.configFactoryDefault();
+    rightBack_V.configFactoryDefault();
+
+    
+    leftFront_V.setNeutralMode(DRIVE_NEUTRAL_MODE);
+    leftCenter_T.setNeutralMode(DRIVE_NEUTRAL_MODE);
+    leftBack_V.setNeutralMode(DRIVE_NEUTRAL_MODE);
+
+    rightFront_V.setNeutralMode(DRIVE_NEUTRAL_MODE);
+    rightCenter_T.setNeutralMode(DRIVE_NEUTRAL_MODE);
+    rightBack_V.setNeutralMode(DRIVE_NEUTRAL_MODE);
+    
+
+    leftFront_V.follow(leftCenter_T);
+    leftBack_V.follow(leftCenter_T);
+
+    rightFront_V.follow(rightCenter_T);
+    rightBack_V.follow(rightCenter_T);
+
+    aDrive = new DifferentialDrive(leftCenter_T, rightCenter_T);
+
+    //Get trajectory from the path
+    Trajectory leftTrajectory = PathfinderFRC.getTrajectory(PATH_NAME + ".left");
+    Trajectory rightTrajectory = PathfinderFRC.getTrajectory(PATH_NAME + ".right");
+    
+    //C
+    leftEncoderFollower = new EncoderFollower(leftTrajectory);
+    rightEncoderFollower = new EncoderFollower(rightTrajectory);
+
+    // The first argument is the proportional gain. Usually this will be quite high
+    // The second argument is the integral gain. This is unused for motion profiling
+    // The third argument is the derivative gain. Tweak this if you are unhappy with the tracking of the trajectory
+    // The fourth argument is the velocity ratio. This is 1 over the maximum velocity you provided in the 
+    //      trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
+    // The fifth argument is your acceleration gain. Tweak this if you want to get to a higher or lower speed quicker    
+    leftEncoderFollower.configurePIDVA(1.0, 0.0, 0.0, 1 / MAX_VELOCITY, 0);
+    rightEncoderFollower.configurePIDVA(1.0, 0.0, 0.0, 1 / MAX_VELOCITY, 0);
+    
+    leftEncoderFollower.configureEncoder(leftCenter_T.getSelectedSensorPosition(0), TICKS_PER_ROTATION, WHEEL_DIAMETER);
+    rightEncoderFollower.configureEncoder(rightCenter_T.getSelectedSensorPosition(0), TICKS_PER_ROTATION, WHEEL_DIAMETER);
+    
+    followerNotifier = new Notifier(this::followPath);
+
+    followerNotifier.startPeriodic(leftTrajectory.get(0).dt);
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -109,6 +191,26 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
+    }
+  }
+
+  public void followPath(){
+    if(leftEncoderFollower.isFinished() || rightEncoderFollower.isFinished()){
+      followerNotifier.stop();
+    } else {
+      double leftSpeed = leftEncoderFollower.calculate(leftCenter_T.getSelectedSensorPosition(0));
+      double rightSpeed = rightEncoderFollower.calculate(rightCenter_T.getSelectedSensorPosition(0));
+    
+      double gyroHeading = gyro.getAngle();
+      double desiredHeading = Pathfinder.r2d(leftEncoderFollower.getHeading());
+
+      double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
+      double turn = 0.8 * (-1/80) * angleDifference;
+
+      double leftPathSpeed = (leftSpeed + turn);
+      double rightPathSpeed = (rightSpeed - turn);
+
+      aDrive.tankDrive(leftPathSpeed, rightPathSpeed);
     }
   }
 
@@ -126,6 +228,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    followerNotifier.stop();
+    aDrive.tankdrive(0,0);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
