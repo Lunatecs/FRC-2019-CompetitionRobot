@@ -36,10 +36,13 @@ public class Elevator extends Subsystem {
   private static int TIMEOUT = 10;
   private static double DEADZONE = .1;
   private static final double POSITION_kP = 0.13;
-  private static final double PERCENT_kP = 0.00007843;
+  //private static final double PERCENT_kP = 0.00007843;
+  private static final double PERCENT_kP = 0.00010843;
 
-  private static final double TOP_ELEVATOR_LIMIT = 25500.0;
-  private static final double BOTTOM_ELEVATOR_LIMIT = 0.0;
+  private static final double TOP_ELEVATOR_LIMIT = -27200.0;
+  private static final double BOTTOM_ELEVATOR_LIMIT = -2000.0;
+
+  public static final int ROCKET_MIDDLE_HATCH = -16000;
 
   public Elevator(){
     leader.configFactoryDefault();
@@ -55,7 +58,7 @@ public class Elevator extends Subsystem {
     follower.configPeakOutputReverse(PEAK_BACKWARD,TIMEOUT);
 
     leader.setSelectedSensorPosition(0,0,TIMEOUT);
-    leader.setSensorPhase(true);
+    
     leader.config_kP(0, PERCENT_kP, TIMEOUT);
     follower.follow(leader);
 

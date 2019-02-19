@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.intake.RaiseBeak;
 import frc.robot.commands.intake.RaiseAndGrabHatch;
+import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.intake.LaunchHatch;
 import frc.robot.commands.intake.LowerBeak;
 import frc.robot.commands.intake.LowerFoot;
 import frc.robot.commands.intake.RaiseFoot;
 import frc.robot.commands.intake.Pistons;
+import frc.robot.subsystems.Elevator;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,6 +47,7 @@ public class OI {
     leftBumperButton.toggleWhenPressed(new LowerBeak());
     redButton.toggleWhenPressed(new LaunchHatch());
     blueButton.toggleWhenPressed(new RaiseAndGrabHatch());
+    greenButton.toggleWhenPressed(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
 
   }
 

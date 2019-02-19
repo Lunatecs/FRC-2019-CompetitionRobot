@@ -41,7 +41,10 @@ public class Wrist extends Subsystem {
     intakeWrist.configFactoryDefault();
 
     intakeWrist.setNeutralMode(WRIST_BRAKE_MODE);
-    intakeWrist.config_kP(0, 1.4, 10);
+    intakeWrist.config_kP(0, 5.0, 10);
+   // intakeWrist.config_kI(0, 0.00024,10);
+    intakeWrist.config_kD(0, 24.0,10);
+
     intakeWrist.setSensorPhase(true);
     intakeWrist.configPeakOutputForward(.1, 10);
     intakeWrist.configPeakOutputReverse(-.3, 10);
