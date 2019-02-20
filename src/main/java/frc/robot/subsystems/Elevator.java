@@ -59,6 +59,8 @@ public class Elevator extends Subsystem {
 
     leader.setSelectedSensorPosition(0,0,TIMEOUT);
     
+    leader.setSensorPhase(false);
+
     leader.config_kP(0, PERCENT_kP, TIMEOUT);
     follower.follow(leader);
 
