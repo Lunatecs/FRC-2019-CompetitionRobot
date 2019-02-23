@@ -29,7 +29,7 @@ public class Wrist extends Subsystem {
   public NeutralMode WRIST_BRAKE_MODE = NeutralMode.Brake;
   public double DEADZONE = 0.1;
   AnalogInput in = new AnalogInput(0);
-  AnalogPotentiometer pot = new AnalogPotentiometer(in);
+  AnalogPotentiometer pot = new AnalogPotentiometer(in,1080,0);
 
   @Override
   public void initDefaultCommand() {
