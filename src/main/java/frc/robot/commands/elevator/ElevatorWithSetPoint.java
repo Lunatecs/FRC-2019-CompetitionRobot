@@ -9,6 +9,7 @@ package frc.robot.commands.elevator;
 
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorWithSetPoint extends Command {
 
@@ -20,13 +21,14 @@ public class ElevatorWithSetPoint extends Command {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.elevator);
     this.setPoint = setPoint;
-
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
     Robot.elevator.setHeight(setPoint);
+    this.isFinished = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -34,7 +36,9 @@ public class ElevatorWithSetPoint extends Command {
   protected void execute() {
     if(Robot.elevator.getHeight()>setPoint-200) {
       isFinished = true;
-    }
+    } 
+    SmartDashboard.putString("Elevator Set Postion", Robot.elevator.getHeight()+"");
+     
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.ElevatorSensors;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Intake;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
   public static Wrist wrist;
   public static LED led;
   public static Limelight limelight;
+  public static ElevatorSensors elevatorSensors;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -52,6 +54,7 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
     led = new LED();
     wrist = new Wrist();
+    elevatorSensors = new ElevatorSensors();
     oi = new OI();
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());

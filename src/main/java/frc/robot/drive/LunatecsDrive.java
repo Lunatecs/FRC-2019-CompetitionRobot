@@ -32,7 +32,7 @@ public class LunatecsDrive {
                     calibrateEncodersToZero();
                     reset = false;
                 }
-
+                //this.drive.tankDrive(speed, speed);
                 goStraight(speed2);
 
             } else {

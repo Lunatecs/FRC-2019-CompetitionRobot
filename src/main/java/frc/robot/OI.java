@@ -47,8 +47,7 @@ public class OI {
     leftBumperButton.toggleWhenPressed(new LowerBeak());
     redButton.toggleWhenPressed(new LaunchHatch());
     blueButton.toggleWhenPressed(new RaiseAndGrabHatch());
-    greenButton.toggleWhenPressed(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
-
+    greenButton.whileHeld(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
   }
 
   public double getSpeed(){

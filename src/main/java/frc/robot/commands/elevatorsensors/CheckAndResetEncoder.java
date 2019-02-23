@@ -5,17 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.elevatorsensors;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.subsystems.ElevatorSensors;
 
-public class ElevatorWithJoystick extends Command {
-  public ElevatorWithJoystick() {
+public class CheckAndResetEncoder extends Command {
+  public CheckAndResetEncoder() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.elevator);
+    requires(Robot.elevatorSensors);
   }
 
   // Called just before this Command runs the first time
@@ -26,11 +25,7 @@ public class ElevatorWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.elevator.setSpeed(Robot.oi.getElevatorSpeed());
-    SmartDashboard.putData(Robot.elevator);
-    SmartDashboard.putNumber("Encoder", Robot.elevator.getHeight());
-
+    Robot.elevatorSensors.checkAndResetEncoder();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,5 +44,4 @@ public class ElevatorWithJoystick extends Command {
   @Override
   protected void interrupted() {
   }
-
 }

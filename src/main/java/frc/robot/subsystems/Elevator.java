@@ -39,10 +39,14 @@ public class Elevator extends Subsystem {
   //private static final double PERCENT_kP = 0.00007843;
   private static final double PERCENT_kP = 0.00010843;
 
-  private static final double TOP_ELEVATOR_LIMIT = -27200.0;
-  private static final double BOTTOM_ELEVATOR_LIMIT = -2000.0;
+  private static final int TOP_ELEVATOR_LIMIT = 27200;
+  private static final int BOTTOM_ELEVATOR_LIMIT = 2000;
+
+  private static final int TOP_ELEVATOR_SET_POINT = -26000;
+  private static final int BOTTOM_ELEVATOR_SET_POINT = -2000;
 
   public static final int ROCKET_MIDDLE_HATCH = -16000;
+
 
   public Elevator(){
     leader.configFactoryDefault();
@@ -59,19 +63,20 @@ public class Elevator extends Subsystem {
 
     leader.setSelectedSensorPosition(0,0,TIMEOUT);
     
-    leader.setSensorPhase(false);
+   
 
-    leader.config_kP(0, PERCENT_kP, TIMEOUT);
+    leader.config_kP(0, POSITION_kP, TIMEOUT);
     follower.follow(leader);
 
   }
 
   public void setSpeed(double speed) {
+
     if(Math.abs(speed)> DEADZONE){
       
       if(speed < 0){
 
-        double error = TOP_ELEVATOR_LIMIT - leader.getSelectedSensorPosition(0);
+        double error = TOP_ELEVATOR_LIMIT + leader.getSelectedSensorPosition(0);
 
         double speed2 = PERCENT_kP * speed* error;
 
@@ -85,7 +90,7 @@ public class Elevator extends Subsystem {
 
       } else if(speed > 0){
 
-        double error = leader.getSelectedSensorPosition(0) - BOTTOM_ELEVATOR_LIMIT;
+        double error = -leader.getSelectedSensorPosition(0) - BOTTOM_ELEVATOR_LIMIT;
 
         double speed2 = PERCENT_kP * speed * error;
 
@@ -102,7 +107,6 @@ public class Elevator extends Subsystem {
     } else {
       stop();
     }
-
     
 
  }
@@ -112,8 +116,10 @@ public class Elevator extends Subsystem {
     boolean rev = false;
     if(leader.getSensorCollection().isFwdLimitSwitchClosed()) {
       fwd = true;
+      this.leader.setSelectedSensorPosition(BOTTOM_ELEVATOR_SET_POINT,0,10);
     } else if(leader.getSensorCollection().isRevLimitSwitchClosed()) {
       rev = true;
+      this.leader.setSelectedSensorPosition(TOP_ELEVATOR_SET_POINT,0,10);
     }
     SmartDashboard.putBoolean("Fwd", fwd);
     SmartDashboard.putBoolean("Rev", rev);
