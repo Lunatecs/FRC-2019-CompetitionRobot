@@ -17,13 +17,13 @@ public class LoneJoystickButton extends Trigger {
   
   JoystickButton include;
   JoystickButton exclude1;
-  JoystickButton excluide2;
+  JoystickButton exclude2;
 
   public LoneJoystickButton(JoystickButton include, JoystickButton exclude1, JoystickButton exclude2) {
 
     this.include = include;
     this.exclude1 = exclude1;
-    this.excluide2 = excluide2;
+    this.exclude2 = exclude2;
 
   }
   
