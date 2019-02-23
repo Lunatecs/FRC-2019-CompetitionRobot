@@ -29,7 +29,7 @@ public class Wrist extends Subsystem {
   public NeutralMode WRIST_BRAKE_MODE = NeutralMode.Brake;
   public double DEADZONE = 0.1;
   AnalogInput in = new AnalogInput(0);
-  AnalogPotentiometer pot = new AnalogPotentiometer(in);
+  AnalogPotentiometer pot = new AnalogPotentiometer(in,1080,0);
 
   @Override
   public void initDefaultCommand() {
@@ -59,7 +59,7 @@ public class Wrist extends Subsystem {
       intakeWrist.set(ControlMode.PercentOutput, speed);
       currentPos = intakeWrist.getSelectedSensorPosition(0);
     } else {
-      if(pot.get()>.195) {
+      if(pot.get()>210) {
         intakeWrist.set(ControlMode.Position, currentPos);
       } else {
         intakeWrist.set(ControlMode.PercentOutput, 0.0);

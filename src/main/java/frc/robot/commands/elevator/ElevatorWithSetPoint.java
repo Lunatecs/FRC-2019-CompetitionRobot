@@ -34,7 +34,7 @@ public class ElevatorWithSetPoint extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.elevator.getHeight()>setPoint-200) {
+    if(Robot.elevator.getHeight()>setPoint-50) {
       isFinished = true;
     } 
     SmartDashboard.putString("Elevator Set Postion", Robot.elevator.getHeight()+"");

@@ -45,7 +45,12 @@ public class Elevator extends Subsystem {
   private static final int TOP_ELEVATOR_SET_POINT = -26000;
   private static final int BOTTOM_ELEVATOR_SET_POINT = -2000;
 
+  public static final int ROCKET_UPPER_HATCH = -26260;
   public static final int ROCKET_MIDDLE_HATCH = -16000;
+  public static final int ROCKET_LOWER_HATCH = -2000;
+
+  public static final double TOP_ELEVATOR_MIN_POWER = 0.1;
+  public static final double BOTTOM_ELEVATOR_MIN_POWER = 0.07;
 
 
   public Elevator(){
@@ -60,6 +65,9 @@ public class Elevator extends Subsystem {
 
     leader.configPeakOutputReverse(PEAK_BACKWARD,TIMEOUT);
     follower.configPeakOutputReverse(PEAK_BACKWARD,TIMEOUT);
+
+    leader.configClosedloopRamp(.25, 10);
+    leader.configOpenloopRamp(.25, 10);
 
     leader.setSelectedSensorPosition(0,0,TIMEOUT);
     
@@ -79,7 +87,7 @@ public class Elevator extends Subsystem {
         double error = TOP_ELEVATOR_LIMIT + leader.getSelectedSensorPosition(0);
 
         double speed2 = PERCENT_kP * speed* error;
-
+        
         if(speed2 < speed){
           speed2 = speed;
         }

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.intake.RaiseBeak;
 import frc.robot.commands.intake.RaiseAndGrabHatch;
+import frc.robot.button.DoubleJoystickButton;
 import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.intake.LaunchHatch;
 import frc.robot.commands.intake.LowerBeak;
@@ -41,13 +42,19 @@ public class OI {
   JoystickButton rightBumperButton = new JoystickButton(operatorJoystick, RobotMap.RIGHT_BUMPER_ID);
   JoystickButton leftBumperButton = new JoystickButton(operatorJoystick, RobotMap.LEFT_BUMPER_ID);
 
+  DoubleJoystickButton leftYellowButton = new DoubleJoystickButton(leftBumperButton, yellowButton);
+  DoubleJoystickButton leftRedButton = new DoubleJoystickButton(leftBumperButton, redButton);
+  DoubleJoystickButton leftGreenButton = new DoubleJoystickButton(leftBumperButton, greenButton);
+
 
   public OI(){
-    rightBumperButton.toggleWhenPressed(new RaiseBeak());
-    leftBumperButton.toggleWhenPressed(new LowerBeak());
-    redButton.toggleWhenPressed(new LaunchHatch());
-    blueButton.toggleWhenPressed(new RaiseAndGrabHatch());
-    greenButton.whileHeld(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
+    //rightBumperButton.toggleWhenPressed(new RaiseBeak());
+    //leftBumperButton.toggleWhenPressed(new LowerBeak());
+    //redButton.toggleWhenPressed(new LaunchHatch());
+    //blueButton.toggleWhenPressed(new RaiseAndGrabHatch());
+    leftYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_HATCH));
+    leftRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
+    leftGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_HATCH));
   }
 
   public double getSpeed(){
