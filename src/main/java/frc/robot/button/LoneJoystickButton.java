@@ -29,7 +29,7 @@ public class LoneJoystickButton extends Trigger {
   
   @Override
   public boolean get() {
-    if(include.get() && !exclude1.get() && !excluide2.get()) {
+    if(include.get() && !exclude1.get() && !exclude2.get()) {
       return true;
     }
     return false;
