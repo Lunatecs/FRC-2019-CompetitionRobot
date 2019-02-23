@@ -26,7 +26,7 @@ public class WristWithJoystick extends Command {
   @Override
   protected void execute() {
 
-    Robot.wrist.setWristSpeed(-Robot.oi.getWristSpeed());
+    Robot.wrist.setWristSpeed(Robot.oi.getWristSpeed());
   }
 
   // Make this return true when this Command no longer needs to run execute()
