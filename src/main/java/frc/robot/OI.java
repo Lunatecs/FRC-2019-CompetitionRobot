@@ -12,11 +12,15 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.intake.RaiseBeak;
 import frc.robot.commands.intake.RaiseAndGrabHatch;
 import frc.robot.button.DoubleJoystickButton;
+import frc.robot.button.LoneJoystickButton;
 import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.intake.LaunchHatch;
 import frc.robot.commands.intake.LowerBeak;
 import frc.robot.commands.intake.LowerFoot;
 import frc.robot.commands.intake.RaiseFoot;
+import frc.robot.commands.intake.PullPistons;
+import frc.robot.commands.intake.PushPistons;
+import frc.robot.commands.wrist.WristSetPosition;
 import frc.robot.commands.intake.Pistons;
 import frc.robot.subsystems.Elevator;
 
@@ -46,15 +50,40 @@ public class OI {
   DoubleJoystickButton leftRedButton = new DoubleJoystickButton(leftBumperButton, redButton);
   DoubleJoystickButton leftGreenButton = new DoubleJoystickButton(leftBumperButton, greenButton);
 
+  DoubleJoystickButton leftBlueButton = new DoubleJoystickButton(leftBumperButton, blueButton);
+
+  DoubleJoystickButton rightYellowButton = new DoubleJoystickButton(rightBumperButton, yellowButton);
+  DoubleJoystickButton rightRedButton = new DoubleJoystickButton(rightBumperButton, redButton);
+  DoubleJoystickButton rightGreenButton = new DoubleJoystickButton(rightBumperButton, greenButton);
+  DoubleJoystickButton rightBlueButton = new DoubleJoystickButton(rightBumperButton, blueButton);
+  
+  LoneJoystickButton loneYellowButton = new LoneJoystickButton(yellowButton, leftBumperButton, rightBumperButton);
+  LoneJoystickButton loneRedButton = new LoneJoystickButton(redButton, leftBumperButton, rightBumperButton);
+  LoneJoystickButton loneGreenButton = new LoneJoystickButton(greenButton, leftBumperButton, rightBumperButton);
+  LoneJoystickButton loneBlueButton = new LoneJoystickButton(blueButton, leftBumperButton, rightBumperButton);
+
 
   public OI(){
-    //rightBumperButton.toggleWhenPressed(new RaiseBeak());
-    //leftBumperButton.toggleWhenPressed(new LowerBeak());
-    //redButton.toggleWhenPressed(new LaunchHatch());
-    //blueButton.toggleWhenPressed(new RaiseAndGrabHatch());
+    loneYellowButton.whileActive(new RaiseBeak());
+    loneGreenButton.whileActive(new LowerBeak());
+    loneRedButton.whenActive(new LaunchHatch());
+    loneBlueButton.whenActive(new RaiseAndGrabHatch());
+    //loneRedButton.whileActive(new RaiseFoot());
+    //loneBlueButton.whileActive(new LowerFoot());
+
+    leftBlueButton.whenActive(new WristSetPosition(280.0));
+    
+    //leftYellowButton.whileActive(new PushPistons());
+    //leftGreenButton.whileActive(new PullPistons());
+
     leftYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_HATCH));
     leftRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
     leftGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_HATCH));
+
+    rightYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_CARGO));
+    rightRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_CARGO));
+    rightGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_CARGO));
+    rightBlueButton.whileActive(new ElevatorWithSetPoint(Elevator.CARGO_SHIP_CARGO));
   }
 
   public double getSpeed(){

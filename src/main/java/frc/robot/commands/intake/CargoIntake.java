@@ -30,11 +30,11 @@ public class CargoIntake extends Command {
     double launch = Robot.oi.getLaunchCargoSpeed();
 
     if(intake>.2) {
-      Robot.intake.setUpperWheelSpeed(intake);
-      Robot.intake.setLowerWheelSpeed(intake);
+      Robot.intake.setUpperWheelSpeed(-intake);
+      Robot.intake.setLowerWheelSpeed(-intake);
     } else if(launch>.2) {
-      Robot.intake.setUpperWheelSpeed(-launch);
-      Robot.intake.setLowerWheelSpeed(-launch);
+      Robot.intake.setUpperWheelSpeed(launch);
+      Robot.intake.setLowerWheelSpeed(launch);
     } else {
       Robot.intake.setUpperWheelSpeed(0);
       Robot.intake.setLowerWheelSpeed(0);

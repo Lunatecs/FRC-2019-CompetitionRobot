@@ -7,34 +7,52 @@
 
 package frc.robot.commands.wrist;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class WristSetPosition extends Command {
-  public WristSetPosition() {
+public class WristSetPosition extends PIDCommand {
+
+  private double setPoint = 0.0;
+  private boolean isFinished = false;
+
+  public WristSetPosition(double setPoint) {
+    super("Wrist",.1,0.0,0.0);
+    this.getPIDController().setAbsoluteTolerance(1.0);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.wrist);
+    this.setPoint = setPoint;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
-    Robot.wrist.setWristPosition(0);
-    //WE WILL DEFINE THE CONSTANT LATER
+    this.isFinished = false;
+    this.setSetpoint(setPoint);
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    SmartDashboard.putBoolean("On Target", this.getPIDController().onTarget());
+
+    if(this.getPIDController().onTarget()) {
+      this.isFinished = true;
+    } else {
+    
+    }
+    SmartDashboard.putData(Robot.wrist);
+    SmartDashboard.putNumber("Wrist Set Point",this.getSetpoint());
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return isFinished;
   }
 
   // Called once after isFinished returns true
@@ -47,4 +65,16 @@ public class WristSetPosition extends Command {
   @Override
   protected void interrupted() {
   }
+
+  @Override
+  protected double returnPIDInput() {
+    return Robot.wrist.getPosition();
+  }
+
+  @Override
+  protected void usePIDOutput(double output) {
+    SmartDashboard.putNumber("Wrist PID Speed", output);
+    Robot.wrist.setWristSpeed(-output);
+  }
+
 }

@@ -75,4 +75,7 @@ public class Wrist extends Subsystem {
 
   }
 
+  public double getPosition() {
+    return pot.get();
+  }
 }

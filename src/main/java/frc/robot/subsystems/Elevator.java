@@ -53,11 +53,11 @@ public class Elevator extends Subsystem {
   public static final double TOP_ELEVATOR_MIN_POWER = -0.15;
   public static final double BOTTOM_ELEVATOR_MIN_POWER = 0.1;
 
-  public static final int ROCKET_UPPER_CARGO = 0;
+  public static final int ROCKET_UPPER_CARGO = -2000;
   //cannot calculate yet bc of brad
   public static final int ROCKET_MIDDLE_CARGO = -21377;
   public static final int ROCKET_LOWER_CARGO = -9272;
-  public static final int CARGO_SHIP_CARGO = 0;
+  public static final int CARGO_SHIP_CARGO = -2000;
   //cannot calculate yet
   
 
