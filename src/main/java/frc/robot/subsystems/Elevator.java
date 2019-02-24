@@ -49,8 +49,8 @@ public class Elevator extends Subsystem {
   public static final int ROCKET_MIDDLE_HATCH = -16000;
   public static final int ROCKET_LOWER_HATCH = -2000;
 
-  public static final double TOP_ELEVATOR_MIN_POWER = 0.1;
-  public static final double BOTTOM_ELEVATOR_MIN_POWER = 0.07;
+  public static final double TOP_ELEVATOR_MIN_POWER = -0.15;
+  public static final double BOTTOM_ELEVATOR_MIN_POWER = 0.1;
 
 
   public Elevator(){
@@ -92,6 +92,11 @@ public class Elevator extends Subsystem {
           speed2 = speed;
         }
 
+        if(speed2 > TOP_ELEVATOR_MIN_POWER) {
+          speed2 = TOP_ELEVATOR_MIN_POWER;
+        } else { 
+          
+        }
         SmartDashboard.putNumber("UP", speed2);
 
         leader.set(ControlMode.PercentOutput, speed2);
@@ -104,6 +109,10 @@ public class Elevator extends Subsystem {
 
         if(speed2 > speed){
           speed2 = speed;
+        }
+
+        if(speed2 < BOTTOM_ELEVATOR_MIN_POWER) {
+          speed2 = BOTTOM_ELEVATOR_MIN_POWER;
         }
 
         SmartDashboard.putNumber("DOWN", speed2);
