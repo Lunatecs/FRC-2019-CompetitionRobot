@@ -94,9 +94,7 @@ public class Elevator extends Subsystem {
 
         if(speed2 > TOP_ELEVATOR_MIN_POWER) {
           speed2 = TOP_ELEVATOR_MIN_POWER;
-        } else { 
-          
-        }
+        } 
         SmartDashboard.putNumber("UP", speed2);
 
         leader.set(ControlMode.PercentOutput, speed2);
