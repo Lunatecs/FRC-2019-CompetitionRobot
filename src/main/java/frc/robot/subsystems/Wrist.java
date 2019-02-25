@@ -23,6 +23,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  * Add your docs here.
  */
 public class Wrist extends Subsystem {
+
+  //TODO change names to their uses ie. cargoship, etc.
+  //TODO add offset to potentiometer and change corresponding angles.
+  public static final double NINETY_DEGREE = 325.0;
+  public static final double FORTY_FIVE_DEGREE = 280.0;
+  public static final double ZERO_DEGREE = 240.0;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public TalonSRX intakeWrist = new TalonSRX(RobotMap.INTAKE_WRIST_CONTROLLER_T_ID);
