@@ -35,7 +35,7 @@ public class LaunchHatch extends CommandGroup {
     addSequential(new LowerBeak());
     addSequential(new WaitCommand(.25));
     addSequential(new PushPistons());
-    addSequential(new WaitCommand(1));
+    addSequential(new WaitCommand(.25));
     addSequential(new PullPistons());
 
   }
