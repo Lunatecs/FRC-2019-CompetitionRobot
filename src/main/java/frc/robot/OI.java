@@ -13,6 +13,7 @@ import frc.robot.commands.intake.RaiseBeak;
 import frc.robot.commands.intake.RaiseAndGrabHatch;
 import frc.robot.button.DoubleJoystickButton;
 import frc.robot.button.LoneJoystickButton;
+import frc.robot.commands.autos.HatchRocket;
 import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.intake.LaunchHatch;
 import frc.robot.commands.intake.LowerBeak;
@@ -23,6 +24,7 @@ import frc.robot.commands.intake.PushPistons;
 import frc.robot.commands.wrist.WristSetPosition;
 import frc.robot.commands.intake.Pistons;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Wrist;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -71,14 +73,18 @@ public class OI {
     //loneRedButton.whileActive(new RaiseFoot());
     //loneBlueButton.whileActive(new LowerFoot());
 
-    leftBlueButton.whenActive(new WristSetPosition(280.0));
+    leftBlueButton.whenActive(new WristSetPosition(Wrist.NINETY_DEGREE));
     
     //leftYellowButton.whileActive(new PushPistons());
     //leftGreenButton.whileActive(new PullPistons());
 
-    leftYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_HATCH));
-    leftRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
-    leftGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_HATCH));
+    //leftYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_HATCH));
+    //leftRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
+    //leftGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_HATCH));
+
+    leftYellowButton.whileActive(new HatchRocket(Wrist.FORTY_FIVE_DEGREE,Elevator.ROCKET_UPPER_HATCH));
+    leftRedButton.whileActive(new HatchRocket(Wrist.NINETY_DEGREE,Elevator.ROCKET_MIDDLE_HATCH));
+    leftGreenButton.whileActive(new HatchRocket(Wrist.NINETY_DEGREE,Elevator.ROCKET_LOWER_HATCH));
 
     rightYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_CARGO));
     rightRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_CARGO));

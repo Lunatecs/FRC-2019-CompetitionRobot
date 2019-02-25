@@ -23,6 +23,7 @@ public class CargoRocket extends CommandGroup {
     //Will wait for elevatorwithsetpoint PID to finish, then will launch hatch 
     addSequential(new ElevatorWithSetPoint(elevatorPos));
     //addSequential(new WaitCommand(.1));
+    //TODO Change to LaunchCargo when it is created
     addSequential(new LaunchHatch());
     //Wait for hatch to clear beak before reset
     addSequential(new WaitCommand(.5));
