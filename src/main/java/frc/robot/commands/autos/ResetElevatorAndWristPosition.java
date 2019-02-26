@@ -9,6 +9,7 @@ package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.commands.elevator.ElevatorTopOrBottom;
 import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.wrist.WristSetPosition;
 import frc.robot.commands.intake.RaiseBeak;
@@ -25,8 +26,8 @@ public class ResetElevatorAndWristPosition extends CommandGroup {
     addSequential(new RaiseBeak());
     //Wait till Beak is raised so it wont hit rocket on way down, may not need
     addSequential(new WaitCommand(.05));
-    addParallel(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_HATCH));
+    addSequential(new ElevatorTopOrBottom(false));
     addSequential(new WristSetPosition(Wrist.NINETY_DEGREE));
-    addSequential(new LowerBeak());
+    //addSequential(new LowerBeak());
   }
 }

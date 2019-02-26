@@ -82,9 +82,9 @@ public class OI {
     //leftRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_HATCH));
     //leftGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_HATCH));
 
-    leftYellowButton.whileActive(new HatchRocket(Wrist.FORTY_FIVE_DEGREE,Elevator.ROCKET_UPPER_HATCH));
-    leftRedButton.whileActive(new HatchRocket(Wrist.NINETY_DEGREE,Elevator.ROCKET_MIDDLE_HATCH));
-    leftGreenButton.whileActive(new HatchRocket(Wrist.NINETY_DEGREE,Elevator.ROCKET_LOWER_HATCH));
+    leftYellowButton.whileActive(new HatchRocket(Wrist.ZERO_DEGREE,true));
+    leftRedButton.whileActive(new HatchRocket(Wrist.ZERO_DEGREE,Elevator.ROCKET_MIDDLE_HATCH));
+    leftGreenButton.whileActive(new HatchRocket(Wrist.ZERO_DEGREE,false));
 
     rightYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_CARGO));
     rightRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_CARGO));

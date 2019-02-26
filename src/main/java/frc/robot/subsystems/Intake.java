@@ -53,7 +53,9 @@ public class Intake extends Subsystem {
 
     upperWheel.setNeutralMode(WHEELS_BRAKE_MODE);
     lowerWheel.setNeutralMode(WHEELS_BRAKE_MODE);
-
+  
+    lowerWheel.configVoltageCompSaturation(12);
+    upperWheel.configVoltageCompSaturation(12);
   }
 
   @Override

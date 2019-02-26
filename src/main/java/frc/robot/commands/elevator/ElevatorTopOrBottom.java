@@ -5,47 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.wrist;
+package frc.robot.commands.elevator;
 
-import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Elevator;
 
-public class WristSetPosition extends PIDCommand {
+public class ElevatorTopOrBottom extends Command {
 
-  private double setPoint = 0.0;
-  private boolean isFinished = false;
+  private boolean top = false;
+  private boolean isFinished = false;;
 
-  public WristSetPosition(double setPoint) {
-    super("Wrist",.1,0.0,0.0);
-    this.getPIDController().setAbsoluteTolerance(2.0);
+  public ElevatorTopOrBottom(boolean top) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.wrist);
-    this.setPoint = setPoint;
+    requires(Robot.elevator);
+    this.top = top;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    this.isFinished = false;
-    this.setSetpoint(setPoint);
-
+    this.isFinished=false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    SmartDashboard.putBoolean("On Target", this.getPIDController().onTarget());
-
-    if(this.getPIDController().onTarget()) {
-      this.isFinished = true;
+    if(top) {
+      if(Robot.elevator.getHeight() == Elevator.TOP_ELEVATOR_SET_POINT) {
+        this.isFinished=true;
+      } else {
+        Robot.elevator.setSpeed(-1.0);
+      }
     } else {
-    
+      if(Robot.elevator.getHeight() == Elevator.BOTTOM_ELEVATOR_SET_POINT) {
+        this.isFinished=true;
+      } else {
+        Robot.elevator.setSpeed(1.0);
+      }
     }
-    SmartDashboard.putData(Robot.wrist);
-    SmartDashboard.putNumber("Wrist Set Point",this.getSetpoint());
 
   }
 
@@ -65,16 +64,4 @@ public class WristSetPosition extends PIDCommand {
   @Override
   protected void interrupted() {
   }
-
-  @Override
-  protected double returnPIDInput() {
-    return Robot.wrist.getPosition();
-  }
-
-  @Override
-  protected void usePIDOutput(double output) {
-    SmartDashboard.putNumber("Wrist PID Speed", output);
-    Robot.wrist.setWristSpeed(-output);
-  }
-
 }

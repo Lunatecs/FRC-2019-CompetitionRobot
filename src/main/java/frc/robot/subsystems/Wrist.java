@@ -52,20 +52,29 @@ public class Wrist extends Subsystem {
     intakeWrist.config_kD(0, 24.0,10);
 
     intakeWrist.setSensorPhase(true);
-    intakeWrist.configPeakOutputForward(.1, 10);
+    intakeWrist.configPeakOutputForward(.3, 10);
     intakeWrist.configPeakOutputReverse(-.3, 10);
     //intakeWrist.configContinuousCurrentLimit(amps,10);
     intakeWrist.configVoltageCompSaturation(2.7);
   }
 
   int currentPos = 0;
+  boolean lowVoltage = true;
 
   public void setWristSpeed(double speed){
     if(Math.abs(speed)> DEADZONE){
+      if(lowVoltage) {
+        intakeWrist.configVoltageCompSaturation(12.0);
+        lowVoltage=false;
+      }
       intakeWrist.set(ControlMode.PercentOutput, speed);
       currentPos = intakeWrist.getSelectedSensorPosition(0);
     } else {
       if(pot.get()>210) {
+        if(!lowVoltage) {
+          intakeWrist.configVoltageCompSaturation(2.7);
+          lowVoltage=true;
+        }
         intakeWrist.set(ControlMode.Position, currentPos);
       } else {
         intakeWrist.set(ControlMode.PercentOutput, 0.0);
@@ -73,6 +82,7 @@ public class Wrist extends Subsystem {
     }
     SmartDashboard.putString("Wrist Position (Current/Set)", intakeWrist.getSelectedSensorPosition(0) + "/" + currentPos);
     SmartDashboard.putNumber("Potentiometer", pot.get());
+    SmartDashboard.putBoolean("Low Valtage", lowVoltage);
   }
 
   public void setWristPosition(int ticks){

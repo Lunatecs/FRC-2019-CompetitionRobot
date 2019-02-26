@@ -35,18 +35,19 @@ public class Elevator extends Subsystem {
  
   private static int TIMEOUT = 10;
   private static double DEADZONE = .1;
-  private static final double POSITION_kP = 0.13;
+  private static final double POSITION_kP = 0.2;
+  private static final double POSITION_kI = 0.0;
   //private static final double PERCENT_kP = 0.00007843;
   private static final double PERCENT_kP = 0.00010843;
 
   private static final int TOP_ELEVATOR_LIMIT = 27200;
   private static final int BOTTOM_ELEVATOR_LIMIT = 2000;
 
-  private static final int TOP_ELEVATOR_SET_POINT = -26000;
-  private static final int BOTTOM_ELEVATOR_SET_POINT = -2000;
+  public static final int TOP_ELEVATOR_SET_POINT = -26000;
+  public static final int BOTTOM_ELEVATOR_SET_POINT = -2000;
 
   public static final int ROCKET_UPPER_HATCH = -26260;
-  public static final int ROCKET_MIDDLE_HATCH = -16000;
+  public static final int ROCKET_MIDDLE_HATCH = -13500;
   public static final int ROCKET_LOWER_HATCH = -2000;
 
 
@@ -83,6 +84,7 @@ public class Elevator extends Subsystem {
    
 
     leader.config_kP(0, POSITION_kP, TIMEOUT);
+    leader.config_kI(0, POSITION_kI, TIMEOUT);
     follower.follow(leader);
 
   }

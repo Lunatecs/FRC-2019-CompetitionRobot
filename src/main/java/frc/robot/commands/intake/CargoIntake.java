@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class CargoIntake extends Command {
+
+  private boolean applyConstantIntake=false;
+
   public CargoIntake() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.intake);
@@ -28,16 +31,23 @@ public class CargoIntake extends Command {
 
     double intake = Robot.oi.getIntakeCargoSpeed();
     double launch = Robot.oi.getLaunchCargoSpeed();
-
+    
     if(intake>.2) {
       Robot.intake.setUpperWheelSpeed(-intake);
       Robot.intake.setLowerWheelSpeed(-intake);
+      this.applyConstantIntake=true;
     } else if(launch>.2) {
       Robot.intake.setUpperWheelSpeed(launch);
       Robot.intake.setLowerWheelSpeed(launch);
+      this.applyConstantIntake=false;
     } else {
-      Robot.intake.setUpperWheelSpeed(0);
-      Robot.intake.setLowerWheelSpeed(0);
+      if(applyConstantIntake) {
+        Robot.intake.setUpperWheelSpeed(-0.17);
+        Robot.intake.setLowerWheelSpeed(-0.25);
+      } else {
+        Robot.intake.setUpperWheelSpeed(0);
+        Robot.intake.setLowerWheelSpeed(0);
+      }
     }
 
     SmartDashboard.putNumber("Intake", intake);
