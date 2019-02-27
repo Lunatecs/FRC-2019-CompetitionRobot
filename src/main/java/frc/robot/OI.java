@@ -14,6 +14,7 @@ import frc.robot.commands.intake.RaiseAndGrabHatch;
 import frc.robot.button.DoubleJoystickButton;
 import frc.robot.button.LoneJoystickButton;
 import frc.robot.commands.autos.HatchRocket;
+import frc.robot.commands.autos.CargoRocket;
 import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.intake.LaunchHatch;
 import frc.robot.commands.intake.LowerBeak;
@@ -86,9 +87,9 @@ public class OI {
     leftRedButton.whileActive(new HatchRocket(Wrist.ZERO_DEGREE,Elevator.ROCKET_MIDDLE_HATCH));
     leftGreenButton.whileActive(new HatchRocket(Wrist.ZERO_DEGREE,false));
 
-    rightYellowButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_UPPER_CARGO));
-    rightRedButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_MIDDLE_CARGO));
-    rightGreenButton.whileActive(new ElevatorWithSetPoint(Elevator.ROCKET_LOWER_CARGO));
+    rightYellowButton.whileActive(new CargoRocket(282.5, true));
+    rightRedButton.whileActive(new CargoRocket(278.5, Elevator.ROCKET_MIDDLE_HATCH));
+    rightGreenButton.whileActive(new CargoRocket(278.5, false));
     rightBlueButton.whileActive(new ElevatorWithSetPoint(Elevator.CARGO_SHIP_CARGO));
   }
 
