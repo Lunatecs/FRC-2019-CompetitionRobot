@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ElevatorSensors;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.UltrasonicSensors;
 import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Wrist;
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
   public static LED led;
   public static Limelight limelight;
   public static ElevatorSensors elevatorSensors;
+  public static UltrasonicSensors ultrasonicSensors;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -55,6 +58,7 @@ public class Robot extends TimedRobot {
     led = new LED();
     wrist = new Wrist();
     elevatorSensors = new ElevatorSensors();
+    ultrasonicSensors = new UltrasonicSensors();
     oi = new OI();
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());

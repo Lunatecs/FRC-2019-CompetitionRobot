@@ -66,6 +66,10 @@ public class DriveTrain extends Subsystem {
     drive.arcadeDrive(speed, rotation, false);
   }
 
+  public void arcadeDriveWithoutEncoders(double speed, double rotation) {
+    drive.arcadeDriveWithoutEncoders(speed, rotation);
+  }
+
   public double getLeftEncoder() {
     return leftCenter_T.getSelectedSensorPosition(0);
   }

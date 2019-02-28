@@ -14,6 +14,7 @@ import frc.robot.commands.intake.RaiseAndGrabHatch;
 import frc.robot.button.DoubleJoystickButton;
 import frc.robot.button.LoneJoystickButton;
 import frc.robot.commands.autos.HatchRocket;
+import frc.robot.commands.autos.AutoDrivetrain;
 import frc.robot.commands.autos.CargoRocket;
 import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.intake.LaunchHatch;
@@ -42,6 +43,8 @@ public class OI {
   public Joystick driverJoystick = new Joystick(RobotMap.DRIVER_JOYSTICK_USB_ID);
   public Joystick operatorJoystick = new Joystick(RobotMap.OPERATOR_JOYSTICK_USB_ID);
   
+  JoystickButton driverRedButton = new JoystickButton(driverJoystick, RobotMap.RED_BUTTON_ID); 
+
   JoystickButton greenButton = new JoystickButton(operatorJoystick, RobotMap.GREEN_BUTTON_ID);
   JoystickButton redButton = new JoystickButton(operatorJoystick, RobotMap.RED_BUTTON_ID);
   JoystickButton blueButton = new JoystickButton(operatorJoystick, RobotMap.BLUE_BUTTON_ID);
@@ -71,6 +74,8 @@ public class OI {
     loneGreenButton.whileActive(new LowerBeak());
     loneRedButton.whenActive(new LaunchHatch());
     loneBlueButton.whenActive(new RaiseAndGrabHatch());
+    
+    driverRedButton.whileActive(new AutoDrivetrain(12));
     //loneRedButton.whileActive(new RaiseFoot());
     //loneBlueButton.whileActive(new LowerFoot());
 

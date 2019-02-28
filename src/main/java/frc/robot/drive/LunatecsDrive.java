@@ -20,6 +20,10 @@ public class LunatecsDrive {
         //Here lies the souls of the robotics students
     }
 
+    public void arcadeDriveWithoutEncoders (double speed, double rotation) {
+        drive.arcadeDrive(speed, rotation);
+    }
+
     public void arcadeDrive(double speed, double rotation, boolean rampUp) {
         if(Math.abs(speed) >= DEADZONE || Math.abs(rotation) >= DEADZONE){
             double speed2 = speed;

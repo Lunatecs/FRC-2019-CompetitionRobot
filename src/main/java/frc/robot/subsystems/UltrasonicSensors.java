@@ -8,16 +8,18 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import frc.robot.RobotMap;
+import frc.robot.commands.autos.UltrasonicTest;
+
 
 /**
  * Add your docs here.
  */
-public class UltrasonicSensor extends Subsystem {
-  private Ultrasonic rangeFinder = new Ultrasonic(RobotMap.ULTRASONIC_ECHO_ID, RobotMap.ULTRASONIC_PING_ID);
+public class UltrasonicSensors extends Subsystem {
+  private Ultrasonic rangeFinder = new Ultrasonic(RobotMap.ULTRASONIC_PING_ID, RobotMap.ULTRASONIC_ECHO_ID);
 
-  public UltrasonicSensor() {
+  public UltrasonicSensors() {
     rangeFinder.setAutomaticMode(true);
   }
 
@@ -26,6 +28,7 @@ public class UltrasonicSensor extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new UltrasonicTest());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
