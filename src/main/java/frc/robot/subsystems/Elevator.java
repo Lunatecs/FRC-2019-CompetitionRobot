@@ -58,7 +58,7 @@ public class Elevator extends Subsystem {
   //cannot calculate yet bc of brad
   public static final int ROCKET_MIDDLE_CARGO = -21377;
   public static final int ROCKET_LOWER_CARGO = -9272;
-  public static final int CARGO_SHIP_CARGO = -2000;
+  public static final int CARGO_SHIP_CARGO = -17000;
   //cannot calculate yet
   
 
