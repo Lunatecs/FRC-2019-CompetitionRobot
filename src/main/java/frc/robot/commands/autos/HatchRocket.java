@@ -20,7 +20,7 @@ public class HatchRocket extends CommandGroup {
    * Add your docs here.
    */
   public HatchRocket(double wristPos, int elevatorPos) {
-    addSequential(new WristSetPosition(wristPos));
+   // addSequential(new WristSetPosition(wristPos));
     //Will wait for elevatorwithsetpoint PID to finish, then will launch hatch 
     addSequential(new ElevatorWithSetPoint(elevatorPos));
     //addSequential(new WaitCommand(.1));
@@ -32,7 +32,7 @@ public class HatchRocket extends CommandGroup {
   }
 
   public HatchRocket(double wristPos, boolean top) {
-    addSequential(new WristSetPosition(wristPos));
+    //addSequential(new WristSetPosition(wristPos));
     //Will wait for elevatorwithsetpoint PID to finish, then will launch hatch 
     addSequential(new ElevatorTopOrBottom(top));
     //addSequential(new WaitCommand(.1));

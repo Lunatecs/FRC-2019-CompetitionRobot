@@ -5,47 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.subsystems.Climber;
 
-
-public class DriveWithJoysticks extends Command {
-  public DriveWithJoysticks() {
-    requires(Robot.drive);
+public class LiftRobot extends Command {
+  public LiftRobot() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
+    Robot.climber.setLiftSpeed(0.5);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    if(Robot.oi.driverJoystick.getRawAxis(RobotMap.LEFT_TRIGGER_ID) > .2) {
-
-//      Robot.drive.arcadeDrive(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.7);
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.7);
-    } else  if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)){
-    
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation());
-    
-    } else {
-    
-      //Robot.drive.arcadeDriveWithoutEncoders((Robot.oi.getSpeed()), Robot.oi.getRotation());
-      Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
-    
-    }
-
-    SmartDashboard.putNumber("LeftEncoder", Robot.drive.getLeftEncoder());
-    SmartDashboard.putNumber("RightEncoder", Robot.drive.getRightEncoder());
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ElevatorSensors;
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static Limelight limelight;
   public static ElevatorSensors elevatorSensors;
   public static UltrasonicSensors ultrasonicSensors;
+  public static Climber climber;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    climber = new Climber();
     intake = new Intake();
     drive = new DriveTrain();
     elevator = new Elevator();

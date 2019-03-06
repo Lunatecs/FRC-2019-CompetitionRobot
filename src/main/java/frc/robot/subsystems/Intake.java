@@ -67,11 +67,15 @@ public class Intake extends Subsystem {
 
 
   public void lowerBeak(){
-    beakSolenoid.set(DoubleSolenoid.Value.kForward);
+    beakSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void raiseBeak(){
-    beakSolenoid.set(DoubleSolenoid.Value.kReverse);
+    beakSolenoid.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void beakOff() {
+    beakSolenoid.set(DoubleSolenoid.Value.kOff);
   }
 
   public void pushPistons(){
@@ -80,6 +84,10 @@ public class Intake extends Subsystem {
 
   public void pullPistons(){
     fangsSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void pistonsOff() {
+    fangsSolenoid.set(DoubleSolenoid.Value.kOff);
   }
 
   public void togglePistons() {
@@ -114,6 +122,10 @@ public class Intake extends Subsystem {
 
   public void raiseFoot(){
     footSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void offFoot() {
+    footSolenoid.set(DoubleSolenoid.Value.kOff);
   }
 
 }

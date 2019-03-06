@@ -48,4 +48,11 @@ public class CargoRocket extends CommandGroup {
     //Raise and lower beak to avoid hitting the beak against rocket while resetting
     addSequential(new ResetElevatorAndWristPosition());
   }
+
+  public CargoRocket(int elevatorPos) { 
+    addSequential(new ElevatorWithSetPoint(elevatorPos));
+    //addSequential(new WaitCommand(.1));
+    //TODO Change to LaunchCargo when it is created
+    addSequential(new LaunchCargo(.75));
+  }
 }

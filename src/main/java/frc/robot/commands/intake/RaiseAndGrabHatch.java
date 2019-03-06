@@ -34,7 +34,7 @@ public class RaiseAndGrabHatch extends CommandGroup {
     addSequential(new RaiseFoot());
     addSequential(new WaitCommand(.65));
     addSequential(new RaiseBeak());
-    addSequential(new WaitCommand(.4));
+    //addSequential(new WaitCommand(.4));
     addSequential(new LowerFoot());
   }
 }

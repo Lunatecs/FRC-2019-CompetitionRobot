@@ -33,8 +33,10 @@ public class RobotMap {
   public static int ELEVATOR_LEAD_CONTROLLER_T_ID   = 7;
   public static int ELEVATOR_FOLLOW_CONTROLLER_V_ID = 6;
 
-  public static int CLIMBER_RIGHT_CONTROLLER_V_ID = 4;
-  public static int CLIMBER_LEFT_CONTROLLER_V_ID  = 13;
+  //right
+  public static int CLIMBER_PULL_CONTROLLER_V_ID = 19; //4;
+  //left
+  public static int CLIMBER_LIFT_CONTROLLER_V_ID  = 13;
 
   public static int DRIVER_JOYSTICK_USB_ID = 0;
   public static int OPERATOR_JOYSTICK_USB_ID = 1;
